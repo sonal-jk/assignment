@@ -17,7 +17,7 @@ const Body = () => {
             <h4 className="mx-3 block">Welcome Back, John</h4>
             <div className="flex justify-around">
             <div>
-                <div className='d-flex gap-5 mt-4 '>
+                <div className='d-flex gap-5 mt-4'>
                     <Charts />
                 </div>
                 <div>
