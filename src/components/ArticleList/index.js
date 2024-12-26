@@ -1,5 +1,8 @@
 import React from 'react';
 import "../../index.css";
+//import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 
 const articleData = [
     {
@@ -35,15 +38,31 @@ const articleData = [
 ];
 
 const ArticleList = () => {
-    const textColor = articleData.map(each => {
-        if (each.status === "Completed") {
-            return 'text-green-500'; // Tailwind green
-        } else if (each.status === 'On Going') {
-            return 'text-orange-500'; // Tailwind orange
-        } else {
-            return 'text-blue-500'; // Tailwind blue
-        }
-    });
+    const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        // Add the API key here
+      const apiKey = process.env.REACT_APP_API_KEY;
+      const response = await fetch(`https://newsapi.org/v2/everything?q=tesla&from=2024-11-26&sortBy=publishedAt&apiKey={apiKey}`);
+      const result = await response.json();
+      console.log(result);
+
+      if (Array.isArray(result.articles)) {
+        setData(result.articles); // Set data if it's an array
+      } else {
+        console.error('Data is not an array:', result);
+      }
+    } 
+    catch (error) {
+       console.error('Error fetching data:', error);
+    }
+};  
+
+
+fetchData();
+  }, []);
 
     return (
         <div className="shadow-lg mx-4 px-6 bg-white rounded-3xl">
@@ -59,16 +78,16 @@ const ArticleList = () => {
                             <th className="py-2 px-4 text-left">Article Name</th>
                             <th className="py-2 px-4 text-left">Author</th>
                             <th className="py-2 px-4 text-left">Publish Date</th>
-                            <th className="py-2 px-4 text-left">Type</th>
+                            <th className="py-2 px-4 text-left">Source</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {articleData.map((course, index) => (
+                        {data && data.map((item, index) => (
                             <tr key={index} className="border-t">
-                                <td className="py-2 px-4">{course.title}</td>
-                                <td className="py-2 px-4">{course.level}</td>
-                                <td className="py-2 px-4">{course.date}</td>
-                                <td className={`py-2 px-4 ${textColor[index]}`}>{course.status}</td>
+                                <td className="py-2 px-4"> <a href={item.url} className="text-blue-500 hover:text-blue-700">{item.title}</a></td>
+                                <td className="py-2 px-4">{item.author}</td>
+                                <td className="py-2 px-4">{item.publishedAt}</td>
+                                <td className="py-2 px-4">{item.source.name}</td>
                             </tr>
                         ))}
                     </tbody>
