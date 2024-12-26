@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import ArticleList from '../ArticleList'
-
+import Charts from '../Charts'
 
 
 const courseDetails = [
@@ -18,7 +18,7 @@ const Body = () => {
             <div className="flex justify-around">
             <div>
                 <div className='d-flex gap-5 mt-4 '>
-
+                    <Charts />
                 </div>
                 <div>
                     <ArticleList />
