@@ -4,39 +4,6 @@ import "../../index.css";
 import { useEffect, useState } from 'react';
 
 
-const articleData = [
-    {
-        title: 'Web Design',
-        level: 'Advance',
-        date: '2nd Jan 2023',
-        status: 'Completed'
-    },
-    {
-        title: 'React',
-        level: 'Advance',
-        date: '9th April 2023',
-        status: 'On Going',
-    },
-    {
-        title: 'MongoDB',
-        level: 'Advance',
-        date: '5th June 2023',
-        status: 'Interested',
-    },
-    {
-        title: 'Angular',
-        level: 'Beginner',
-        date: '7th July 2023',
-        status: 'Interested',
-    },
-    {
-        title: 'CSS',
-        level: 'Intermediate',
-        date: '2nd Feb 2023',
-        status: 'Completed',
-    },
-];
-
 const ArticleList = () => {
     const [data, setData] = useState(null);
 
@@ -44,10 +11,9 @@ const ArticleList = () => {
     const fetchData = async () => {
       try{
         // Add the API key here
-      const apiKey = process.env.REACT_APP_API_KEY;
-      const response = await fetch(`https://newsapi.org/v2/everything?q=tesla&from=2024-11-26&sortBy=publishedAt&apiKey={apiKey}`);
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b11c531085e7469fa0ef923e618ee4d7`);
       const result = await response.json();
-      console.log(result);
+      console.log(result.articles);
 
       if (Array.isArray(result.articles)) {
         setData(result.articles); // Set data if it's an array

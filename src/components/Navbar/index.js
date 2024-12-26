@@ -21,7 +21,6 @@ const VerticalNavbar = () => {
           </li>
         </ul>
       </nav>
-      
     );
 };
 export default VerticalNavbar;
