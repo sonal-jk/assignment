@@ -4,31 +4,11 @@ import "../../index.css";
 import { useEffect, useState } from 'react';
 
 
-const ArticleList = () => {
-    const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try{
-        // Add the API key here
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b11c531085e7469fa0ef923e618ee4d7`);
-      const result = await response.json();
-      console.log(result.articles);
-
-      if (Array.isArray(result.articles)) {
-        setData(result.articles); // Set data if it's an array
-      } else {
-        console.error('Data is not an array:', result);
-      }
-    } 
-    catch (error) {
-       console.error('Error fetching data:', error);
-    }
-};  
-
-
-fetchData();
-  }, []);
+const ArticleList = ({data}) => {
+  if (!(data)) {
+    console.error("The 'data' prop must be an array.");
+    return <div>No articles available.</div>;
+  }
 
     return (
         <div className="shadow-lg mx-4 px-6 bg-white rounded-3xl">

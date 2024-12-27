@@ -2,12 +2,14 @@ import './App.css';
 import VerticalNavbar from './components/Navbar';
 import Body from './components/Body';
 import Login from "./components/Login";
+import SearchFilter from './components/SearchFilter';
 
 function App() {
   return ( 
+    //<SearchFilter/>
     //Add logic for authenticate then show next componenets in comments
-    <Login/>
-    //<div className="flex flex-row"> <VerticalNavbar /> <Body /> </div>
+    //<Login/>
+    <div className="flex flex-row"> <VerticalNavbar /> <Body /> </div>
   );
 }
 
